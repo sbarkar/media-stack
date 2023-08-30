@@ -2,7 +2,7 @@ version: '2'
 name: nginx
 services:
   nginx:
-    image: nginx:1.25.1-alpine
+    image: nginx
     container_name: nginx
     networks:
       - mynetwork
@@ -19,5 +19,5 @@ volumes:
   letsencrypt:
 
 networks:
-  mynetwork:
+  media-network:
     external: true
