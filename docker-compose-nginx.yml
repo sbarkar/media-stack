@@ -5,7 +5,7 @@ services:
     image: nginx
     container_name: nginx
     networks:
-      - mynetwork
+      - media-network
     volumes:
       - nginx-config:/etc/nginx
       - letsencrypt:/etc/letsencrypt
