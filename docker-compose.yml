@@ -15,11 +15,9 @@ services:
       - OPENVPN_USER=${OPENVPN_USER:-""}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD:-""}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES:-Switzerland}
+      - DNS_KEEP_NAMESERVER=on
     networks:
       - media-network
-      - internal-network
-    dns:
-      - 127.0.0.11
     ports:
       - 5080:5080
       - 6881:6881
@@ -48,7 +46,6 @@ services:
     image: lscr.io/linuxserver/radarr
     networks:
       - media-network
-      - internal-network
     environment:
       - PUID=1000
       - PGID=1000
@@ -65,7 +62,6 @@ services:
     container_name: sonarr
     networks:
       - media-network
-      - internal-network
     environment:
       - PUID=1000
       - PGID=1000
@@ -135,5 +131,3 @@ volumes:
 networks:
   media-network:
     external: true
-  internal-network:
-    internal: true
