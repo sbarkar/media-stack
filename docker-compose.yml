@@ -117,4 +117,4 @@ networks:
   media-network:
     external: true
   internal-network:
-    driver: bridge
+    internal: true
