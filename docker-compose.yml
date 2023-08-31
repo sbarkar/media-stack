@@ -46,6 +46,7 @@ services:
     image: lscr.io/linuxserver/radarr
     networks:
       - media-network
+      - internal-network
     environment:
       - PUID=1000
       - PGID=1000
@@ -62,6 +63,7 @@ services:
     container_name: sonarr
     networks:
       - media-network
+      - internal-network
     environment:
       - PUID=1000
       - PGID=1000
