@@ -20,7 +20,7 @@ services:
       - media-network
     ports:
       - 5080:5080
-      - 6881:6881
+      - 6881:6881/tcp
       - 6881:6881/udp
       - 9696:9696
     restart: "unless-stopped"
@@ -119,7 +119,6 @@ services:
     restart: unless-stopped
 
 volumes:
-  torrent-downloads:
   radarr-config:
   sonarr-config:
   prowlarr-config:
