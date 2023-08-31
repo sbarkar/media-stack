@@ -20,7 +20,7 @@ There are two ways this stack can be deployed.
 Before we deploy the stack, We must create docker network first
 
 ```bash
-docker network create mynetwork
+docker network create media-network
 ```
 
 **Deploy the stack with VPN**
