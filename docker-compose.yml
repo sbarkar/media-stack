@@ -38,7 +38,7 @@ services:
       - WEBUI_PORT=5080
     volumes:
       - qbittorrent-config:/config
-      - /mnt/media/downloads:/downloads
+      - /mnt/media/downloads:/mnt/media/downloads
     restart: "unless-stopped"
 
   radarr:
@@ -54,7 +54,8 @@ services:
       - 7878:7878
     volumes:
       - radarr-config:/config
-      - /mnt/media/movies:/downloads
+      - /mnt/media/downloads:/mnt/media/downloads
+      - /mnt/media/movies:/mnt/media/movies
     restart: "unless-stopped"
 
   sonarr:
@@ -68,7 +69,8 @@ services:
       - TZ=UTC
     volumes:
       - sonarr-config:/config
-      - /mnt/media/tvshows:/downloads
+      - /mnt/media/downloads:/mnt/media/downloads
+      - /mnt/media/tvshows:/mnt/media/tvshows
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -98,7 +100,7 @@ services:
       - TZ=UTC
     volumes:
       - jellyfin-config:/config
-      - /mnt/media:/data
+      - /mnt/media:/mnt/media
     ports:
       - 8096:8096
       - 7359:7359/udp
