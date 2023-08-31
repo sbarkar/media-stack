@@ -7,7 +7,7 @@ services:
     ## Read https://github.com/qdm12/gluetun/wiki for details on configuring VPN for different service providers.
     profiles: [ "vpn" ]
     container_name: vpn
-    image: qmcgaw/gluetun:v3.35.0
+    image: qmcgaw/gluetun
     cap_add:
       - NET_ADMIN
     environment:
