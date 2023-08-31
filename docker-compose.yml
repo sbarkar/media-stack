@@ -106,6 +106,19 @@ services:
       - 7359:7359/udp
       - 8920:8920
     restart: unless-stopped
+  
+  nginx:
+    image: nginx
+    container_name: nginx
+    networks:
+      - media-network
+    volumes:
+      - nginx-config:/etc/nginx
+      - letsencrypt:/etc/letsencrypt
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
 
 volumes:
   torrent-downloads:
@@ -114,6 +127,8 @@ volumes:
   prowlarr-config:
   jellyfin-config:
   qbittorrent-config:
+  nginx-config:
+  letsencrypt:
 
 networks:
   media-network:
