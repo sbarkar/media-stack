@@ -5,7 +5,7 @@ services:
   vpn:
     profiles: [ "vpn" ]
     container_name: vpn
-    image: qmcgaw/gluetun
+    image: qmcgaw/gluetun:v3.35.0
     cap_add:
       - NET_ADMIN
     devices:
