@@ -141,7 +141,7 @@ services:
     # Comment below ports if VPN is enabled.
     #ports:
     #  - 9696:9696
-    #restart: unless-stopped
+    restart: unless-stopped
 
   jellyfin:
     image: linuxserver/jellyfin
