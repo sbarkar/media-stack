@@ -15,6 +15,7 @@ services:
       - OPENVPN_USER=${OPENVPN_USER:-""}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD:-""}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES:-Switzerland}
+      - DNS_KEEP_NAMESERVER=on
     networks:
       - media-network
     ports:
@@ -92,7 +93,6 @@ services:
     image: linuxserver/jellyfin
     container_name: jellyfin
     devices:
-      - /dev/dri/card0:/dev/dri/card0
       - /dev/dri/renderD128:/dev/dri/renderD128
     networks:
       - media-network
