@@ -92,6 +92,9 @@ services:
   jellyfin:
     image: linuxserver/jellyfin
     container_name: jellyfin
+    devices:
+      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri/renderD128:/dev/dri/renderD128
     networks:
       - media-network
     environment:
