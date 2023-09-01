@@ -40,6 +40,21 @@ services:
       - qbittorrent-config:/config
       - /mnt/media/downloads:/mnt/media/downloads
     restart: "unless-stopped"
+  
+  nzbget:
+    container_name: nzbget
+    image: linuxserver/nzbget
+    depends_on:
+      - vpn
+    network_mode: service:vpn
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    volumes:
+      - nzbget-config:/config
+      - /mnt/media/downloads:/downloads
+    restart: "unless-stopped"
 
   radarr:
     container_name: radarr
@@ -130,6 +145,7 @@ volumes:
   qbittorrent-config:
   nginx-config:
   letsencrypt:
+  nzbget-config:
 
 networks:
   media-network:
