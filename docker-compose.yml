@@ -51,6 +51,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
+    ports:
+      - 6789:6789
     volumes:
       - nzbget-config:/config
       - /mnt/media/downloads:/downloads
