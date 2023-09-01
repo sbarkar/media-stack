@@ -23,6 +23,7 @@ services:
       - 6881:6881/tcp
       - 6881:6881/udp
       - 9696:9696
+      - 6789:6789
     restart: "unless-stopped"
 
   qbittorrent:
@@ -51,12 +52,11 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-    ports:
-      - 6789:6789
     volumes:
       - nzbget-config:/config
-      - /mnt/media/downloads:/downloads
+      - /mnt/media/downloads:/mnt/media/downloads
     restart: "unless-stopped"
+
 
   radarr:
     container_name: radarr
