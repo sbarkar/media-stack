@@ -107,4 +107,4 @@ This guide assists in setting up a media stack on Proxmox using Docker Compose, 
 
 ---
 
-This README provides a structured and detailed guide based on our conversation. Remember, while this guide is comprehensive, you might need to adjust it based on specific use cases or changes in software. Always refer to official documentation for any third-party software or services.
+This README provides a specific set-up for my use case. Remember, while this guide is comprehensive, you might need to adjust it based on specific use cases or changes in software. Always refer to the official documentation for any third-party software or services.
