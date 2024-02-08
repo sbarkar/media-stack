@@ -5,7 +5,7 @@ services:
   vpn:
     profiles: [ "vpn" ]
     container_name: vpn
-    image: qmcgaw/gluetun:v3.35.0
+    image: qmcgaw/gluetun:v3.36.0
     cap_add:
       - NET_ADMIN
     devices:
@@ -129,7 +129,8 @@ services:
     image: nginx
     container_name: nginx
     networks:
-      - media-network
+      media-network:
+        ipv4_address: 172.18.0.100
     volumes:
       - nginx-config:/etc/nginx
       - letsencrypt:/etc/letsencrypt
