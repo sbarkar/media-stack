@@ -4,7 +4,7 @@ services:
   vpn:
     profiles: [ "vpn" ]
     container_name: vpn
-    image: qmcgaw/gluetun:v3.36.0
+    image: qmcgaw/gluetun
     cap_add:
       - NET_ADMIN
     devices:
@@ -22,7 +22,7 @@ services:
       - 6881:6881/udp
       - 9696:9696
       - 6789:6789
-    restart: "unless-stopped"
+    restart: unless-stopped
 
   qbittorrent:
     container_name: qbittorrent
@@ -38,23 +38,22 @@ services:
     volumes:
       - qbittorrent-config:/config
       - /mnt/torrents:/mnt/torrents
-    restart: "unless-stopped"
+    restart: unless-stopped
 
-  nzbget:
-    container_name: nzbget
-    image: nzbgetcom/nzbget:latest
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
     depends_on:
       - vpn
     network_mode: service:vpn
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=UTC
+      - TZ=Etc/UTC
     volumes:
-      - nzbget-config:/config
+      - sabnzbd-config:/config
       - /mnt/usenet:/mnt/usenet
-    restart: "unless-stopped"
-
+    restart: unless-stopped
 
   radarr:
     container_name: radarr
@@ -70,7 +69,7 @@ services:
     volumes:
       - radarr-config:/config
       - /mnt:/mnt
-    restart: "unless-stopped"
+    restart: unless-stopped
 
   sonarr:
     image: lscr.io/linuxserver/sonarr
@@ -103,7 +102,7 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
-  
+
   prowlarr:
     container_name: prowlarr
     image: lscr.io/linuxserver/prowlarr
@@ -137,7 +136,7 @@ services:
       - 7359:7359/udp
       - 8920:8920
     restart: unless-stopped
-  
+
   nginx:
     image: nginx
     container_name: nginx
@@ -161,7 +160,7 @@ volumes:
   qbittorrent-config:
   nginx-config:
   letsencrypt:
-  nzbget-config:
+  sabnzbd-config:
 
 networks:
   media-network:
