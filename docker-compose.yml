@@ -24,6 +24,19 @@ services:
       - 9696:9696
     restart: unless-stopped
 
+  maintainerr:
+    image: ghcr.io/jorenn92/maintainerr:latest # or jorenn92/maintainerr:latest
+    container_name: maintainerr
+    volumes:
+      - maintainerr-config:/opt/data
+    environment:
+       - TZ=Europe/Zurich
+    networks:
+      - media-network
+    ports:
+       - 6246:6246
+    restart: unless-stopped
+
   qbittorrent:
     container_name: qbittorrent
     image: lscr.io/linuxserver/qbittorrent
@@ -117,26 +130,6 @@ services:
       - prowlarr-config:/config
     restart: unless-stopped
 
-#  jellyfin:
-#    image: jellyfin/jellyfin
-#    container_name: jellyfin
-#    devices:
-#      - /dev/dri/renderD128:/dev/dri/renderD128
-#    networks:
-#      - media-network
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=UTC
-#    volumes:
-#      - jellyfin-config:/config
-#      - /mnt/media:/mnt/media
-#    ports:
-#      - 8096:8096
-#      - 7359:7359/udp
-#      - 8920:8920
-#    restart: unless-stopped
-
   plex:
     container_name: plex
     image: plexinc/pms-docker
@@ -164,21 +157,6 @@ services:
       - /mnt/media/transcode:/transcode
       - /mnt/media:/mnt/media
 
-
-#  nginx:
-#    image: nginx
-#    container_name: nginx
-#    networks:
-#      media-network:
-#        ipv4_address: 172.18.0.100
-#    volumes:
-#      - nginx-config:/etc/nginx
-#      - letsencrypt:/etc/letsencrypt
-#    ports:
-#      - 80:80
-#      - 443:443
-#    restart: unless-stopped
-
 volumes:
   radarr-config:
   sonarr-config:
@@ -190,6 +168,7 @@ volumes:
   #letsencrypt:
   sabnzbd-config:
   plex-config:
+  maintainerr-config:
 
 networks:
   media-network:
