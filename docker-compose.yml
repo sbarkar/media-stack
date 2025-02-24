@@ -18,10 +18,10 @@ services:
       - media-network
     ports:
       - 5080:5080
+      - 8080:8080
       - 6881:6881/tcp
       - 6881:6881/udp
       - 9696:9696
-      - 6789:6789
     restart: unless-stopped
 
   qbittorrent:
@@ -117,50 +117,79 @@ services:
       - prowlarr-config:/config
     restart: unless-stopped
 
-  jellyfin:
-    image: jellyfin/jellyfin
-    container_name: jellyfin
+#  jellyfin:
+#    image: jellyfin/jellyfin
+#    container_name: jellyfin
+#    devices:
+#      - /dev/dri/renderD128:/dev/dri/renderD128
+#    networks:
+#      - media-network
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=UTC
+#    volumes:
+#      - jellyfin-config:/config
+#      - /mnt/media:/mnt/media
+#    ports:
+#      - 8096:8096
+#      - 7359:7359/udp
+#      - 8920:8920
+#    restart: unless-stopped
+
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
+    environment:
+      - TZ="Europe/Zurich"
+      - PLEX_CLAIM="claim-if6zo1_riscQ-mg-5UVb"
+      - http://192.168.1.33:32400/
     networks:
       - media-network
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
+    ports:
+      - 32400:32400/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    hostname: plex.barkar.ch
     volumes:
-      - jellyfin-config:/config
+      - plex-config:/config
+      - /mnt/media/transcode:/transcode
       - /mnt/media:/mnt/media
-    ports:
-      - 8096:8096
-      - 7359:7359/udp
-      - 8920:8920
-    restart: unless-stopped
 
-  nginx:
-    image: nginx
-    container_name: nginx
-    networks:
-      media-network:
-        ipv4_address: 172.18.0.100
-    volumes:
-      - nginx-config:/etc/nginx
-      - letsencrypt:/etc/letsencrypt
-    ports:
-      - 80:80
-      - 443:443
-    restart: unless-stopped
+
+#  nginx:
+#    image: nginx
+#    container_name: nginx
+#    networks:
+#      media-network:
+#        ipv4_address: 172.18.0.100
+#    volumes:
+#      - nginx-config:/etc/nginx
+#      - letsencrypt:/etc/letsencrypt
+#    ports:
+#      - 80:80
+#      - 443:443
+#    restart: unless-stopped
 
 volumes:
   radarr-config:
   sonarr-config:
   bazarr-config:
   prowlarr-config:
-  jellyfin-config:
+  #jellyfin-config:
   qbittorrent-config:
-  nginx-config:
-  letsencrypt:
+  #nginx-config:
+  #letsencrypt:
   sabnzbd-config:
+  plex-config:
 
 networks:
   media-network:
